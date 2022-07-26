@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LeaveManagement.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220725104943_AddedLeaveTables")]
-    partial class AddedLeaveTables
+    [Migration("20220726081724_AddedLeaveTable")]
+    partial class AddedLeaveTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -119,11 +119,7 @@ namespace LeaveManagement.Web.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("EmployeeId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("LeaveTypeID")
-                        .HasColumnType("int");
 
                     b.Property<int>("LeaveTypeId")
                         .HasColumnType("int");
@@ -133,7 +129,7 @@ namespace LeaveManagement.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LeaveTypeID");
+                    b.HasIndex("LeaveTypeId");
 
                     b.ToTable("LeaveAllocations");
                 });
@@ -156,7 +152,6 @@ namespace LeaveManagement.Web.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -305,7 +300,7 @@ namespace LeaveManagement.Web.Data.Migrations
                 {
                     b.HasOne("LeaveManagement.Web.Data.LeaveType", "LeaveType")
                         .WithMany()
-                        .HasForeignKey("LeaveTypeID")
+                        .HasForeignKey("LeaveTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
